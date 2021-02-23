@@ -1,0 +1,33 @@
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form action="/nuevo" method="POST" enctype="multipart/form-data">
+            Empresa: <input type="text" name="empresa" size= 20>
+            <br><br>
+            Codigo: <input type="text" name="cod" size= 8>
+            <br><br>
+            Plazas: <input type="text" name="plazas" size= 1>
+            <br><br>
+            Meses: <input type="text" name="meses" size= 1>
+            <br><br>
+            Sueldo: <input type="text" name="sueldo" size= 4>
+            <br><br>
+            Modalidad: <input type="text" name="mod" size= 2>
+            <br><br>
+            Direccion: <input type="text" name="dir" size= 10>
+            <br><br>
+            Detalle
+            <br>
+            <textarea  name="detalle" rows="8" cols="50"></textarea><br>
+            Requisitos
+            <br>
+            <textarea id="req" name="req" rows="8" cols="50"></textarea><br>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock content %}

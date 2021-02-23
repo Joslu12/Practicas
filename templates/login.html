@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Google OAuth login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Si da problemas el Oauth probar la url con http en lugar de https -->
+        
+        <meta name="google-signin-client_id" content="135068085550-gphamjo3k4iih2ju1pmud1v5f7erd1vh.apps.googleusercontent.com">
+
+        <script>
+            var profile, id_token;
+            function goToApp(){
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/login', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                
+                document.getElementById("idtoken").value = id_token;
+                document.getElementById("correo").value = profile.getEmail();
+                document.getElementById("formulario").submit();
+            }
+            function onSignIn(googleUser) {
+                profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId() + 'Do not send to your backend! Use an ID token instead.'); 
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); 
+                id_token = googleUser.getAuthResponse().id_token;
+                console.log('ID token: ' + id_token);
+                
+                console.log('You can check the ID token with:');
+                console.log('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=<ID token>');
+                console.log('for instance:');
+                console.log('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token);
+                
+                document.getElementById('loginbtn').disabled = false;
+                }
+
+                function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function () {
+                        console.log('User signed out.');
+                    });
+                    document.getElementById("idtoken").value ="";
+                    document.getElementById("correo").value = "";
+                    document.getElementById('loginbtn').disabled = true;
+                }
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body>
+        <h1 style="text-align: center">Inicie sesión con Google Oauth de forma segura, una vez iniciado pulse Entrar </h1>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div><br>
+        <button id="loginbtn" onclick="goToApp();" disabled="disabled">Entrar</button><br><br>
+
+        <button onclick="signOut();">Desconectar</button>
+        <form method="POST" action="/login" id="formulario">
+            <input type="hidden" id="correo" name="correo">
+            <input type="hidden" id="idtoken" name="idtoken">
+          </form> 
+
+          <h2>{{ error }}</h2>
+    </body>
+</html>

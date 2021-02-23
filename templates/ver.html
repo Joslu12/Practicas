@@ -1,0 +1,28 @@
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1>{{res.empresa}} {{res.cod}}<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></h1>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        Plazas: {{res.plazas}} Duracion: {{res.duracion}} Sueldo: {{res.sueldo}} Modalidad: {{res.mod}}
+        <br><br>
+        Direccion: {{res.dir}}
+        <br><br>
+        Requisitos:
+        <br><br>
+        {{res.req}}
+        <br><br>
+        Detalle:
+        <br><br>
+        {{res.detalle}}
+        
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock content %}

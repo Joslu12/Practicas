@@ -1,0 +1,44 @@
+{% block content %}
+<br><br><br>
+<form action="/nuevo" method="GET">
+    <input type="submit" value="Nueva oferta">
+</form>
+
+<h1 style="text-align: center">Icaro</h1>
+        
+    <h1 style="text-align: center">Mensajes Recibidos</h1>
+        <table class="table" border="1" style="margin: auto;">
+            <thead>
+            <th>Empresa</th>
+            <th>Codigo</th>
+            <th>Plazas</th>
+            <th>Meses</th>
+            <th>Sueldo</th>
+            <th>Modalidad</th>
+            <th>Direccion</th>
+            <th>Detalle</th>
+            <th>Requisitos</th>
+            <th>Ver</th>
+            </thead>
+            <tbody>
+            {% for i in lista %}
+            <tr>
+                <td>{{i.empresa}}</td>
+                <td>{{ i.cod }}</td>
+                <td>{{i.plazas}}</td>
+                <td>{{i.meses}}</td>
+                <td>{{ i.sueldo }}</td>
+                <td>{{i.mod}}</td>
+                <td>{{i.dir}}</td>
+                <td>{{ i.detalle }}</td>
+                <td>{{i.req}}</td>
+                <td><a class="btn btn-warning" href="/ver/{{i['_id']}}"> Ver </a></td>
+            </tr>
+            
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+
+{% endblock content %}
